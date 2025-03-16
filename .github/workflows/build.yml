@@ -31,14 +31,14 @@ jobs:
     - name: Package Extension
       run: |
         cd dist
-        zip -r ../bookmark-plus.zip *
+        zip -r ../bookmark-plus-${{ github.ref_name }}.zip *
         cd ..
         
     - name: Create Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: bookmark-plus.zip
+        files: bookmark-plus-${{ github.ref_name }}.zip
         name: Release ${{ github.ref_name }}
         body: |
           Bookmark Plus Chrome Extension Release ${{ github.ref_name }}
@@ -52,8 +52,8 @@ jobs:
           ### 安装说明 Installation Guide:
           
           #### Chrome/Edge/Arc 浏览器:
-          1. 解压 bookmark-plus.zip
-             Unzip bookmark-plus.zip
+          1. 解压 bookmark-plus-${{ github.ref_name }}.zip
+             Unzip bookmark-plus-${{ github.ref_name }}.zip
           
           2. 访问 chrome://extensions
              Visit chrome://extensions
