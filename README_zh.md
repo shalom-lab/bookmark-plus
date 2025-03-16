@@ -1,4 +1,4 @@
-# 书签增强 (Bookmark Plus)
+# Bookmark Plus
 
 <p align="center">
   <img src="./public/icons/icon128.png" alt="Bookmark Plus Logo" width="128" height="128">
