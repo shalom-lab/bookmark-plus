@@ -44,16 +44,34 @@ jobs:
           Bookmark Plus Chrome Extension Release ${{ github.ref_name }}
           
           ### 支持的浏览器 Supported Browsers:
-          - Chrome
-          - Edge
-          - Arc
-          - 其他基于 Chromium 的浏览器
+          - Chrome / 谷歌浏览器
+          - Edge / 微软 Edge 浏览器
+          - Arc / Arc 浏览器
+          - Other Chromium-based browsers / 其他基于 Chromium 的浏览器
           
-          ### 安装说明 Installation:
+          ### 安装说明 Installation Guide:
+          
+          #### Chrome/Edge/Arc 浏览器:
           1. 解压 bookmark-plus.zip
+             Unzip bookmark-plus.zip
+          
           2. 访问 chrome://extensions
+             Visit chrome://extensions
+          
           3. 开启"开发者模式"
+             Enable "Developer mode"
+          
           4. 点击"加载已解压的扩展程序"
+             Click "Load unpacked"
+          
           5. 选择解压后的文件夹
+             Select the unzipped folder
+          
+          ### 注意事项 Notes:
+          - 请保持开发者模式开启以使用此扩展
+            Please keep developer mode enabled to use this extension
+          
+          - 如遇到问题，请在 GitHub Issues 中反馈
+            If you encounter any issues, please report them in GitHub Issues
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
