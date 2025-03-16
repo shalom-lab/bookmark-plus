@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/github/v/release/shalom-lab/bookmark-plus?color=2080f0" alt="Version">
   <img src="https://img.shields.io/github/stars/shalom-lab/bookmark-plus?style=social" alt="GitHub stars">
   <img src="https://img.shields.io/badge/platform-Chrome%20%7C%20Edge%20%7C%20Arc-2080f0.svg" alt="Platform">
-  <img src="https://img.shields.io/badge/languages-6-2080f0.svg" alt="Languages">
+  <img src="https://img.shields.io/badge/languages-14-2080f0.svg" alt="Languages">
   <img src="https://img.shields.io/badge/license-MIT-2080f0.svg" alt="License">
 </p>
 
@@ -30,22 +30,29 @@
   - Quick search and filter capabilities
 
 - **GitHub Integration**
-  - Sync bookmarks across devices via GitHub
-  - Automatic backup and version control
+  - One-click upload bookmarks to GitHub repository
+  - Manual backup to your GitHub repository
   - Secure token-based authentication
 
 - **User Experience**
   - Clean and modern interface
-  - Support for 6 languages
+  - Support for 14 languages
   - Customizable settings
-  - Dark mode support
+
+<p align="center">
+  <img src="./public/promo-large.png" alt="Bookmark Plus Promo" width="100%" style="max-width: 1400px">
+</p>
 
 ### 🚀 Quick Start
 
-1. Install from Chrome Web Store
-2. Click the extension icon to open (or use shortcut `Alt+Q`)
-3. Start organizing your bookmarks
-4. (Optional) Configure GitHub sync
+1. Download the latest version from [Releases](https://github.com/shalom-lab/bookmark-plus/releases/latest)
+2. Unzip the downloaded file
+3. Go to `chrome://extensions/`
+4. Enable "Developer mode" in the top right
+5. Click "Load unpacked" and select the unzipped folder
+6. Click the extension icon to open (or use shortcut `Alt+Q`)
+7. Start organizing your bookmarks
+8. (Optional) Configure GitHub sync
 
 ### 🔧 Configuration
 
@@ -57,7 +64,7 @@
 5. Click upload to backup your bookmarks
 
 #### Language Settings
-- Supports: English, 中文, 日本語, 한국어, Français, Deutsch
+- Supports: English, 中文, 日本語, 한국어, Français, Deutsch, Español, Português, Italiano, Русский, Nederlands, Türkçe, Tiếng Việt, Bahasa Indonesia
 - Change language in settings
 
 ### 🤝 Contributing

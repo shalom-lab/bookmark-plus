@@ -74,7 +74,15 @@ const languageOptions = [
   { label: '日本語', value: 'ja' },
   { label: '한국어', value: 'ko' },
   { label: 'Français', value: 'fr' },
-  { label: 'Deutsch', value: 'de' }
+  { label: 'Deutsch', value: 'de' },
+  { label: 'Español', value: 'es' },
+  { label: 'Português', value: 'pt' },
+  { label: 'Italiano', value: 'it' },
+  { label: 'Русский', value: 'ru' },
+  { label: 'Nederlands', value: 'nl' },
+  { label: 'Türkçe', value: 'tr' },
+  { label: 'Tiếng Việt', value: 'vi' },
+  { label: 'Bahasa Indonesia', value: 'id' }
 ]
 
 // 计算属性

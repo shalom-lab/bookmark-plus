@@ -3,14 +3,15 @@
     <header class="header">
       <div class="header-content">
         <h1>Bookmark Plus</h1>
-        <iframe
-          src="https://ghbtns.com/github-btn.html?user=shalom-lab&repo=bookmark-plus&type=star&count=true"
-          frameborder="0"
-          scrolling="0"
-          width="100"
-          height="20"
-          title="GitHub"
-        ></iframe>
+        <a href="https://github.com/shalom-lab/bookmark-plus" 
+           target="_blank" 
+           class="github-link"
+           title="Star us on GitHub">
+          <svg height="16" viewBox="0 0 16 16" width="16">
+            <path fill="currentColor" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z"/>
+          </svg>
+          Star
+        </a>
       </div>
     </header>
     <n-tabs type="line" animated>
@@ -128,6 +129,25 @@ onMounted(() => {
   font-weight: bold;
   color: #2080f0;
   margin: 0;
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  font-size: 12px;
+  color: #666;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.github-link:hover {
+  color: #2080f0;
+  border-color: #2080f0;
+  background: rgba(32, 128, 240, 0.1);
 }
 
 :deep(.n-tabs) {
