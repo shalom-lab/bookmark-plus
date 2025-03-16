@@ -75,11 +75,14 @@ const isTokenSet = ref(false)
 
 // 生成默认文件名
 const generateDefaultFilename = () => {
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
-  return `bookmarks-${timestamp}.json`
+  const date = new Date()
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `bookmarks-${year}-${month}-${day}.json`
 }
 
-const currentFilename = ref(generateDefaultFilename()) // 移到函数声明后面
+const currentFilename = ref(generateDefaultFilename())
 
 const formValue = ref({
   token: '',
@@ -145,7 +148,11 @@ const fetchRepositories = async () => {
 // 格式化日期
 const formatDate = (date) => {
   if (!date) return ''
-  return new Date(date).toLocaleString()
+  const d = new Date(date)
+  const year = d.getFullYear()
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
 }
 
 // 重置 Token
@@ -239,7 +246,7 @@ const handleUpload = async () => {
       message.success(props.translations.uploadSuccess)
       lastUploadTime.value = new Date().toISOString()
       await saveToStorage({ lastUploadTime: lastUploadTime.value })
-      // 更新为新的默认文件名
+      // 更新为新的默认文件名（使用当前日期）
       currentFilename.value = generateDefaultFilename()
     } else {
       throw new Error(await response.text())

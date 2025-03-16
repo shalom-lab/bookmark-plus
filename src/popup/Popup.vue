@@ -18,7 +18,7 @@ import locales from './locales'
 const themeOverrides = {
   common: {
     primaryColor: '#2080f0',
-    primaryColorHover: '#4098fc',
+    primaryColorHover: '#4098f7',
     primaryColorPressed: '#1060c9',
     primaryColorSuppl: '#2080f0',
     successColor: '#2080f0',
@@ -34,9 +34,9 @@ const themeOverrides = {
     textColorDisabledPrimary: '#fff',
     rippleColor: '#fff',
     colorPrimary: '#2080f0',
-    colorHoverPrimary: '#4098fc',
+    colorHoverPrimary: '#4098f7',
     colorPressedPrimary: '#1060c9',
-    colorFocusPrimary: '#4098fc'
+    colorFocusPrimary: '#4098f7'
   },
   Tag: {
     borderRadius: '4px',
@@ -66,6 +66,11 @@ const themeOverrides = {
     colorWarning: '#2080f0',
     colorError: '#2080f0',
     colorInfo: '#2080f0'
+  },
+  Rate: {
+    itemColor: 'rgba(32, 128, 240, 0.2)',
+    itemColorActive: '#2080f0',
+    itemColorHover: '#4098f7'
   }
 }
 

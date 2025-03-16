@@ -15,7 +15,7 @@
         <n-dynamic-tags v-model:value="saveForm.tags" />
       </n-form-item>
       <n-form-item :label="props.translations.bookmarkRating" path="rating">
-        <n-rate v-model:value="saveForm.rating" :default-value="3" :count="5" color="#2080f0">
+        <n-rate v-model:value="saveForm.rating" :default-value="3" :count="5">
         </n-rate>
       </n-form-item>
       <n-button type="primary" block @click="handleSave" size="large" strong>
