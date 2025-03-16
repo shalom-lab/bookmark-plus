@@ -1,0 +1,59 @@
+name: Build Chrome Extension
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+        
+    - name: Build Extension
+      run: npm run build
+        
+    - name: Package Extension
+      run: |
+        cd dist
+        zip -r ../bookmark-plus.zip *
+        cd ..
+        
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: bookmark-plus.zip
+        name: Release ${{ github.ref_name }}
+        body: |
+          Bookmark Plus Chrome Extension Release ${{ github.ref_name }}
+          
+          ### 支持的浏览器 Supported Browsers:
+          - Chrome
+          - Edge
+          - Arc
+          - 其他基于 Chromium 的浏览器
+          
+          ### 安装说明 Installation:
+          1. 解压 bookmark-plus.zip
+          2. 访问 chrome://extensions
+          3. 开启"开发者模式"
+          4. 点击"加载已解压的扩展程序"
+          5. 选择解压后的文件夹
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
