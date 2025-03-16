@@ -1,7 +1,17 @@
 <template>
   <div class="popup">
     <header class="header">
-      <h1>Bookmark Plus</h1>
+      <div class="header-content">
+        <h1>Bookmark Plus</h1>
+        <iframe
+          src="https://ghbtns.com/github-btn.html?user=shalom-lab&repo=bookmark-plus&type=star&count=true"
+          frameborder="0"
+          scrolling="0"
+          width="100"
+          height="20"
+          title="GitHub"
+        ></iframe>
+      </div>
     </header>
     <n-tabs type="line" animated>
       <!-- Save Tab -->
@@ -103,6 +113,13 @@ onMounted(() => {
 .header {
   padding: 12px 16px;
   flex-shrink: 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 
 .header h1 {
