@@ -43,7 +43,7 @@
 ### 🚀 Quick Start
 
 1. Install from Chrome Web Store
-2. Click the extension icon to open
+2. Click the extension icon to open (or use shortcut `Alt+Q`)
 3. Start organizing your bookmarks
 4. (Optional) Configure GitHub sync
 
@@ -54,7 +54,7 @@
 2. Enter the token in extension settings
 3. Select your repository
 4. Choose storage path
-5. Enable auto-sync (optional)
+5. Click upload to backup your bookmarks
 
 #### Language Settings
 - Supports: English, 中文, 日本語, 한국어, Français, Deutsch
