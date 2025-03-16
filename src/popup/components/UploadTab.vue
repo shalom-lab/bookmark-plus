@@ -216,6 +216,53 @@ const handleSaveSettings = () => {
   })
 }
 
+// 获取文件信息（如果存在）
+const getFileInfo = async (owner, repo, filename) => {
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filename}`
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `token ${formValue.value.token}`,
+      }
+    })
+    if (response.status === 404) {
+      return null // 文件不存在
+    }
+    return response.json()
+  } catch (error) {
+    console.error('Error getting file info:', error)
+    return null
+  }
+}
+
+// 上传到GitHub
+const uploadToGithub = async (content, filename, owner, repo) => {
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filename}`
+  
+  // 先获取文件信息
+  const fileInfo = await getFileInfo(owner, repo, filename)
+  
+  const requestBody = {
+    message: `Upload bookmarks: ${filename}`,
+    content: btoa(unescape(encodeURIComponent(content))),
+    branch: 'main'
+  }
+
+  // 如果文件存在，添加 sha
+  if (fileInfo) {
+    requestBody.sha = fileInfo.sha
+  }
+
+  return fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `token ${formValue.value.token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestBody)
+  })
+}
+
 // 上传到GitHub
 const handleUpload = async () => {
   if (!isConfigValid.value) {
@@ -294,24 +341,6 @@ const saveToStorage = (data) => {
         reject(error)
       }
     }
-  })
-}
-
-// 上传到GitHub
-const uploadToGithub = async (content, filename, owner, repo) => {
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filename}`
-
-  return fetch(url, {
-    method: 'PUT',
-    headers: {
-      'Authorization': `token ${formValue.value.token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      message: `Upload bookmarks: ${filename}`,
-      content: btoa(unescape(encodeURIComponent(content))),
-      branch: 'main'
-    })
   })
 }
 
