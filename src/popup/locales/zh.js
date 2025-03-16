@@ -146,5 +146,31 @@ export default {
   justNow: '刚刚',
   minutesAgo: '{n}分钟前',
   hoursAgo: '{n}小时前',
-  daysAgo: '{n}天前'
+  daysAgo: '{n}天前',
+
+  // GitHub Upload
+  upload: '上传',
+  githubToken: 'GitHub Token',
+  selectRepository: '选择仓库',
+  storagePath: '存储路径',
+  filename: '文件名',
+  enterGithubToken: '请输入GitHub Token...',
+  enterStoragePath: '请输入存储路径...',
+  enterFilename: '请输入文件名（留空使用默认格式）...',
+  filenameDescription: '默认格式：bookmarks-{时间戳}.json',
+  githubTokenRequired: '请输入GitHub Token',
+  repositoryRequired: '请选择仓库',
+  storagePathRequired: '请输入存储路径',
+  saveGithubSettings: '保存GitHub设置',
+  uploadToGithub: '上传到GitHub',
+  uploading: '上传中...',
+  uploadSuccess: '上传成功',
+  uploadFailed: '上传失败',
+  configureGithubFirst: '请先配置GitHub设置',
+  noBookmarksToUpload: '没有书签可上传',
+  lastUpload: '上次上传时间',
+  enterTokenFirst: '请先输入GitHub Token',
+  failedToLoadRepos: '加载仓库列表失败',
+  tokenConfigured: '已配置',
+  resetToken: '重置'
 } 

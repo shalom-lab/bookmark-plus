@@ -146,5 +146,31 @@ export default {
   justNow: 'Just now',
   minutesAgo: '{n} minutes ago',
   hoursAgo: '{n} hours ago',
-  daysAgo: '{n} days ago'
+  daysAgo: '{n} days ago',
+
+  // GitHub Upload
+  upload: 'Upload',
+  githubToken: 'GitHub Token',
+  selectRepository: 'Select Repository',
+  storagePath: 'Storage Path',
+  filename: 'Filename',
+  enterGithubToken: 'Enter GitHub Token...',
+  enterStoragePath: 'Enter storage path...',
+  enterFilename: 'Enter filename (leave empty for default format)...',
+  filenameDescription: 'Default format: bookmarks-{timestamp}.json',
+  githubTokenRequired: 'GitHub Token is required',
+  repositoryRequired: 'Please select a repository',
+  storagePathRequired: 'Storage path is required',
+  saveGithubSettings: 'Save GitHub Settings',
+  uploadToGithub: 'Upload to GitHub',
+  uploading: 'Uploading...',
+  uploadSuccess: 'Upload successful',
+  uploadFailed: 'Upload failed',
+  configureGithubFirst: 'Please configure GitHub settings first',
+  noBookmarksToUpload: 'No bookmarks to upload',
+  lastUpload: 'Last upload',
+  enterTokenFirst: 'Please enter GitHub Token first',
+  failedToLoadRepos: 'Failed to load repositories',
+  tokenConfigured: 'Configured',
+  resetToken: 'Reset'
 } 

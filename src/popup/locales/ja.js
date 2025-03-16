@@ -146,5 +146,31 @@ export default {
   justNow: 'たった今',
   minutesAgo: '{n}分前',
   hoursAgo: '{n}時間前',
-  daysAgo: '{n}日前'
+  daysAgo: '{n}日前',
+
+  // GitHub Upload
+  upload: 'アップロード',
+  githubToken: 'GitHub Token',
+  selectRepository: 'リポジトリを選択',
+  storagePath: '保存パス',
+  filename: 'ファイル名',
+  enterGithubToken: 'GitHub Tokenを入力...',
+  enterStoragePath: '保存パスを入力...',
+  enterFilename: 'ファイル名を入力（空白の場合はデフォルト形式）...',
+  filenameDescription: 'デフォルト形式：bookmarks-{タイムスタンプ}.json',
+  githubTokenRequired: 'GitHub Tokenを入力してください',
+  repositoryRequired: 'リポジトリを選択してください',
+  storagePathRequired: '保存パスを入力してください',
+  saveGithubSettings: 'GitHub設定を保存',
+  uploadToGithub: 'GitHubにアップロード',
+  uploading: 'アップロード中...',
+  uploadSuccess: 'アップロード成功',
+  uploadFailed: 'アップロード失敗',
+  configureGithubFirst: 'GitHub設定を先に行ってください',
+  noBookmarksToUpload: 'アップロードするブックマークがありません',
+  lastUpload: '最終アップロード',
+  enterTokenFirst: 'GitHub Tokenを先に入力してください',
+  failedToLoadRepos: 'リポジトリの読み込みに失敗しました',
+  tokenConfigured: '設定済み',
+  resetToken: 'リセット'
 } 

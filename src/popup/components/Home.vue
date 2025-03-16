@@ -18,6 +18,11 @@
       <n-tab-pane name="settings" :tab="translations.settings">
         <SettingsTab :settings="settings" :translations="translations" />
       </n-tab-pane>
+
+      <!-- Upload Tab -->
+      <n-tab-pane name="upload" :tab="translations.upload">
+        <UploadTab :translations="translations"/>
+      </n-tab-pane>
     </n-tabs>
   </div>
 </template>
@@ -26,6 +31,7 @@
 import { ref, inject, onMounted } from 'vue'
 import SaveTab from './SaveTab.vue'
 import QueryTab from './QueryTab.vue'
+import UploadTab from './UploadTab.vue'
 import SettingsTab from './SettingsTab.vue'
 const translations = inject('translations')
 

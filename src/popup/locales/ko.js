@@ -146,5 +146,31 @@ export default {
   justNow: '방금',
   minutesAgo: '{n}분 전',
   hoursAgo: '{n}시간 전',
-  daysAgo: '{n}일 전'
+  daysAgo: '{n}일 전',
+
+  // GitHub Upload
+  upload: '업로드',
+  githubToken: 'GitHub Token',
+  selectRepository: '저장소 선택',
+  storagePath: '저장 경로',
+  filename: '파일 이름',
+  enterGithubToken: 'GitHub Token 입력...',
+  enterStoragePath: '저장 경로 입력...',
+  enterFilename: '파일 이름 입력 (기본 형식을 사용하려면 비워두세요)...',
+  filenameDescription: '기본 형식: bookmarks-{타임스탬프}.json',
+  githubTokenRequired: 'GitHub Token을 입력해주세요',
+  repositoryRequired: '저장소를 선택해주세요',
+  storagePathRequired: '저장 경로를 입력해주세요',
+  saveGithubSettings: 'GitHub 설정 저장',
+  uploadToGithub: 'GitHub에 업로드',
+  uploading: '업로드 중...',
+  uploadSuccess: '업로드 성공',
+  uploadFailed: '업로드 실패',
+  configureGithubFirst: 'GitHub 설정을 먼저 구성해주세요',
+  noBookmarksToUpload: '업로드할 북마크가 없습니다',
+  lastUpload: '마지막 업로드',
+  enterTokenFirst: 'GitHub Token을 먼저 입력해주세요',
+  failedToLoadRepos: '저장소 목록을 불러오지 못했습니다',
+  tokenConfigured: '설정됨',
+  resetToken: '재설정'
 } 

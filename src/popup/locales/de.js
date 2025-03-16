@@ -146,5 +146,31 @@ export default {
   justNow: 'Gerade eben',
   minutesAgo: 'vor {n} Minuten',
   hoursAgo: 'vor {n} Stunden',
-  daysAgo: 'vor {n} Tagen'
+  daysAgo: 'vor {n} Tagen',
+
+  // GitHub Upload
+  upload: 'Hochladen',
+  githubToken: 'GitHub Token',
+  selectRepository: 'Repository auswählen',
+  storagePath: 'Speicherpfad',
+  filename: 'Dateiname',
+  enterGithubToken: 'GitHub Token eingeben...',
+  enterStoragePath: 'Speicherpfad eingeben...',
+  enterFilename: 'Dateinamen eingeben (leer lassen für Standardformat)...',
+  filenameDescription: 'Standardformat: bookmarks-{Zeitstempel}.json',
+  githubTokenRequired: 'GitHub Token wird benötigt',
+  repositoryRequired: 'Bitte wählen Sie ein Repository aus',
+  storagePathRequired: 'Speicherpfad wird benötigt',
+  saveGithubSettings: 'GitHub-Einstellungen speichern',
+  uploadToGithub: 'Auf GitHub hochladen',
+  uploading: 'Wird hochgeladen...',
+  uploadSuccess: 'Erfolgreich hochgeladen',
+  uploadFailed: 'Hochladen fehlgeschlagen',
+  configureGithubFirst: 'Bitte zuerst GitHub-Einstellungen konfigurieren',
+  noBookmarksToUpload: 'Keine Lesezeichen zum Hochladen',
+  lastUpload: 'Letzter Upload',
+  enterTokenFirst: 'Bitte zuerst GitHub Token eingeben',
+  failedToLoadRepos: 'Laden der Repositories fehlgeschlagen',
+  tokenConfigured: 'Konfiguriert',
+  resetToken: 'Zurücksetzen'
 } 

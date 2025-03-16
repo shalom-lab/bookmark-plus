@@ -146,5 +146,31 @@ export default {
   justNow: 'À l\'instant',
   minutesAgo: 'il y a {n} minutes',
   hoursAgo: 'il y a {n} heures',
-  daysAgo: 'il y a {n} jours'
+  daysAgo: 'il y a {n} jours',
+
+  // GitHub Upload
+  upload: 'Téléverser',
+  githubToken: 'Token GitHub',
+  selectRepository: 'Sélectionner un dépôt',
+  storagePath: 'Chemin de stockage',
+  filename: 'Nom du fichier',
+  enterGithubToken: 'Entrer le token GitHub...',
+  enterStoragePath: 'Entrer le chemin de stockage...',
+  enterFilename: 'Entrer le nom du fichier (laisser vide pour le format par défaut)...',
+  filenameDescription: 'Format par défaut : bookmarks-{horodatage}.json',
+  githubTokenRequired: 'Le token GitHub est requis',
+  repositoryRequired: 'Veuillez sélectionner un dépôt',
+  storagePathRequired: 'Le chemin de stockage est requis',
+  saveGithubSettings: 'Enregistrer les paramètres GitHub',
+  uploadToGithub: 'Téléverser vers GitHub',
+  uploading: 'Téléversement en cours...',
+  uploadSuccess: 'Téléversement réussi',
+  uploadFailed: 'Échec du téléversement',
+  configureGithubFirst: 'Veuillez d\'abord configurer les paramètres GitHub',
+  noBookmarksToUpload: 'Aucun favori à téléverser',
+  lastUpload: 'Dernier téléversement',
+  enterTokenFirst: 'Veuillez d\'abord entrer le token GitHub',
+  failedToLoadRepos: 'Échec du chargement des dépôts',
+  tokenConfigured: 'Configuré',
+  resetToken: 'Réinitialiser'
 } 
