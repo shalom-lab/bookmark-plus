@@ -39,6 +39,19 @@
   - Support for 14 languages
   - Customizable settings
 
+- **Chrome data sync**
+  - Bookmarks sync across devices when you are signed into Chrome and sync is enabled for extensions
+  - Full copy kept in `chrome.storage.local` (large quota); `chrome.storage.sync` stores **chunked** data to avoid Chrome’s **~8 KB per-key** limit that used to break saves
+
+### 📦 Chrome sync & capacity
+
+| Topic | Status |
+|--------|--------|
+| **Per-key ~8 KB limit** | Addressed by splitting bookmark JSON across multiple sync keys (`bm_chunks_v1_*`). Saving large libraries no longer fails for that reason alone. |
+| **Authoritative copy on device** | Full list is always written to `chrome.storage.local` first so the popup stays reliable even if sync is slow or hits quota. |
+| **Conflicts** | When reading, newer data wins using stored timestamps (`updatedAt`), preferring chunked sync, then local, then legacy single-key sync if present. |
+| **Total sync quota (~100 KB)** | Still enforced by Chrome for **all** keys of this extension’s sync area. Very large bookmark sets may stop syncing fully while **local data remains usable**; use **GitHub upload** (Upload tab) for heavy backups. |
+
 <p align="center">
   <img src="./public/promo-large.png" alt="Bookmark Plus Promo" width="100%" style="max-width: 1400px">
 </p>

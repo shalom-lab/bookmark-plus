@@ -18,11 +18,13 @@
             {{ props.translations.clearTags }}
           </n-button>
         </div>
-        <div class="tags-list">
-          <n-tag v-for="tag in tagOptions" :key="tag.value" :style="getTagFilterStyle(tag.value)" size="small" round
-            clickable @click="toggleTagSelection(tag.value)">
-            {{ tag.label }}
-          </n-tag>
+        <div class="tags-list-scroll">
+          <div class="tags-list">
+            <n-tag v-for="tag in tagOptions" :key="tag.value" :style="getTagFilterStyle(tag.value)" size="small" round
+              clickable @click="toggleTagSelection(tag.value)">
+              {{ tag.label }}
+            </n-tag>
+          </div>
         </div>
       </div>
     </div>
@@ -100,7 +102,7 @@
                   <n-checkbox :checked="selectedBookmarks.includes(bookmark.id)"
                     @update:checked="(checked) => handleCheckboxChange(checked, bookmark.id)" />
                   <n-ellipsis style="max-width: 90%">
-                    <a :href="bookmark.url" target="_blank" rel="noopener noreferrer" class="bookmark-title">
+                    <a :href="safeBookmarkHref(bookmark.url)" target="_blank" rel="noopener noreferrer" class="bookmark-title">
                       {{ bookmark.title }}
                     </a>
                   </n-ellipsis>
@@ -135,7 +137,7 @@
                   <n-checkbox :checked="selectedBookmarks.includes(bookmark.id)"
                     @update:checked="(checked) => handleCheckboxChange(checked, bookmark.id)" />
                   <n-ellipsis style="max-width: 90%">
-                    <a :href="bookmark.url" target="_blank" rel="noopener noreferrer" class="bookmark-title">
+                    <a :href="safeBookmarkHref(bookmark.url)" target="_blank" rel="noopener noreferrer" class="bookmark-title">
                       {{ bookmark.title }}
                     </a>
                   </n-ellipsis>
@@ -169,6 +171,8 @@ import { ref, computed, onMounted, inject } from 'vue'
 import { SearchOutline, TrashOutline, SwapHorizontalOutline } from '@vicons/ionicons5'
 import { CheckBoxOutlined, CheckBoxOutlineBlankFilled, FileUploadOutlined, FileDownloadOutlined } from '@vicons/material'
 import { useMessage, useDialog } from 'naive-ui'
+import { getBookmarks, setBookmarks, bookmarkSyncAreaChanged } from '../../utils/bookmarksStorage.js'
+import { safeBookmarkHref, normalizeUserUrlInput } from '../../utils/urlSafety.js'
 
 const props = defineProps({
   settings: {
@@ -277,19 +281,20 @@ const handleDelete = (bookmark) => {
 const removeBookmark = (bookmark) => {
   try {
     if (chrome.storage) {
-      chrome.storage.sync.get(['bookmarks'], (result) => {
-        const existingBookmarks = Array.isArray(result.bookmarks) ? result.bookmarks : []
-        const updatedBookmarks = existingBookmarks.filter(b => b.id !== bookmark.id)
-        
-        chrome.storage.sync.set({ bookmarks: updatedBookmarks }, () => {
-          if (chrome.runtime.lastError) {
-            message.error(props.translations.saveFailed)
-            return
-          }
+      getBookmarks()
+        .then((existingBookmarks) => {
+          const list = Array.isArray(existingBookmarks) ? existingBookmarks : []
+          const updatedBookmarks = list.filter(b => b.id !== bookmark.id)
+          return setBookmarks(updatedBookmarks).then(() => updatedBookmarks)
+        })
+        .then((updatedBookmarks) => {
           bookmarks.value = updatedBookmarks
           message.success(props.translations.bookmarkDeleted)
         })
-      })
+        .catch((err) => {
+          console.error(err)
+          message.error(props.translations.saveFailed)
+        })
     } else {
       const storedBookmarks = localStorage.getItem('bookmarks')
       const existingBookmarks = storedBookmarks ? JSON.parse(storedBookmarks) : []
@@ -337,17 +342,20 @@ const handleImport = () => {
 
         // 验证每个书签的必要字段并标准化数据
         const validBookmarks = importedBookmarks.filter(bookmark => {
-          return (
-            bookmark &&
-            typeof bookmark === 'object' &&
-            typeof bookmark.url === 'string' &&
-            bookmark.url.trim() !== '' &&
-            typeof bookmark.title === 'string' &&
-            bookmark.title.trim() !== ''
-          )
+          if (
+            !bookmark ||
+            typeof bookmark !== 'object' ||
+            typeof bookmark.url !== 'string' ||
+            bookmark.url.trim() === '' ||
+            typeof bookmark.title !== 'string' ||
+            bookmark.title.trim() === ''
+          ) {
+            return false
+          }
+          return !!normalizeUserUrlInput(bookmark.url)
         }).map(bookmark => ({
           id: Date.now() + Math.floor(Math.random() * 1000), // 生成新的唯一ID
-          url: bookmark.url.trim(),
+          url: normalizeUserUrlInput(bookmark.url),
           title: bookmark.title.trim(),
           category: bookmark.category || 'Default',
           rating: Number(bookmark.rating) || 0,
@@ -362,46 +370,39 @@ const handleImport = () => {
 
         // 存储处理
         if (chrome.storage) {
-          chrome.storage.sync.get(['bookmarks'], (result) => {
-            if (chrome.runtime.lastError) {
-              message.error(props.translations.importError)
-              return
-            }
+          getBookmarks()
+            .then((existingBookmarks) => {
+              const list = Array.isArray(existingBookmarks) ? existingBookmarks : []
+              const uniqueBookmarks = [...list]
+              let importCount = 0
 
-            const existingBookmarks = Array.isArray(result.bookmarks) ? result.bookmarks : []
-            
-            // 使用URL作为唯一标识进行去重
-            const uniqueBookmarks = [...existingBookmarks]
-            let importCount = 0
-
-            validBookmarks.forEach(newBookmark => {
-              const existingIndex = uniqueBookmarks.findIndex(b => b.url === newBookmark.url)
-              if (existingIndex === -1) {
-                // 如果不存在，添加新书签
-                uniqueBookmarks.push(newBookmark)
-                importCount++
-              } else {
-                // 如果存在，使用新数据更新现有书签
-                uniqueBookmarks[existingIndex] = {
-                  ...newBookmark,
-                  id: uniqueBookmarks[existingIndex].id // 保留原有ID
+              validBookmarks.forEach(newBookmark => {
+                const existingIndex = uniqueBookmarks.findIndex(b => b.url === newBookmark.url)
+                if (existingIndex === -1) {
+                  uniqueBookmarks.push(newBookmark)
+                  importCount++
+                } else {
+                  uniqueBookmarks[existingIndex] = {
+                    ...newBookmark,
+                    id: uniqueBookmarks[existingIndex].id
+                  }
                 }
-              }
-            })
+              })
 
-            // 保存更新后的书签列表
-            chrome.storage.sync.set({ bookmarks: uniqueBookmarks }, () => {
-              if (chrome.runtime.lastError) {
-                message.error(props.translations.saveFailed)
-                return
-              }
+              return setBookmarks(uniqueBookmarks).then(() => importCount)
+            })
+            .then((importCount) => {
+              loadData()
               if (importCount > 0) {
                 message.success(props.translations.bookmarksImported.replace('{count}', importCount))
               } else {
                 message.info(props.translations.noNewBookmarks)
               }
             })
-          })
+            .catch((err) => {
+              console.error(err)
+              message.error(props.translations.saveFailed)
+            })
         } else {
           try {
             const storedBookmarks = localStorage.getItem('bookmarks')
@@ -487,20 +488,21 @@ const handleExport = () => {
 const removeSelectedBookmarks = () => {
   try {
     if (chrome.storage) {
-      chrome.storage.sync.get(['bookmarks'], (result) => {
-        const existingBookmarks = Array.isArray(result.bookmarks) ? result.bookmarks : []
-        const updatedBookmarks = existingBookmarks.filter(b => !selectedBookmarks.value.includes(b.id))
-        
-        chrome.storage.sync.set({ bookmarks: updatedBookmarks }, () => {
-          if (chrome.runtime.lastError) {
-            message.error(props.translations.saveFailed)
-            return
-          }
+      getBookmarks()
+        .then((existingBookmarks) => {
+          const list = Array.isArray(existingBookmarks) ? existingBookmarks : []
+          const updatedBookmarks = list.filter(b => !selectedBookmarks.value.includes(b.id))
+          return setBookmarks(updatedBookmarks).then(() => updatedBookmarks)
+        })
+        .then((updatedBookmarks) => {
           bookmarks.value = updatedBookmarks
           selectedBookmarks.value = []
           message.success(props.translations.bookmarksDeleted)
         })
-      })
+        .catch((err) => {
+          console.error(err)
+          message.error(props.translations.saveFailed)
+        })
     } else {
       const storedBookmarks = localStorage.getItem('bookmarks')
       const existingBookmarks = storedBookmarks ? JSON.parse(storedBookmarks) : []
@@ -521,11 +523,9 @@ const removeSelectedBookmarks = () => {
 const saveBookmarks = () => {
   try {
     if (chrome.storage) {
-      chrome.storage.sync.set({ bookmarks: bookmarks.value }, () => {
-        if (chrome.runtime.lastError) {
-          console.error('Error saving bookmarks:', chrome.runtime.lastError)
-          message.error(props.translations.saveFailed)
-        }
+      setBookmarks(bookmarks.value).catch((err) => {
+        console.error('Error saving bookmarks:', err)
+        message.error(props.translations.saveFailed)
       })
     } else {
       localStorage.setItem('bookmarks', JSON.stringify(bookmarks.value))
@@ -577,38 +577,44 @@ const getTagFilterStyle = (tag) => {
   }
 }
 
+const normalizeBookmarkList = (rawBookmarks) => {
+  const list = Array.isArray(rawBookmarks) ? rawBookmarks : []
+  bookmarks.value = list.map(bookmark => ({
+    id: bookmark.id || Date.now(),
+    url: bookmark.url || '',
+    title: bookmark.title || '',
+    category: bookmark.category || 'Default',
+    rating: Number(bookmark.rating) || 0,
+    tags: Array.isArray(bookmark.tags) ? bookmark.tags.map(tag => tag.toString()) : [],
+    createdAt: bookmark.createdAt || new Date().toISOString()
+  }))
+  const uniqueCategories = new Set(['Default'])
+  bookmarks.value.forEach(bookmark => {
+    if (bookmark.category) {
+      uniqueCategories.add(bookmark.category)
+    }
+  })
+  categories.value = Array.from(uniqueCategories)
+}
+
 // 加载数据
 const loadData = () => {
   if (chrome.storage) {
-    chrome.storage.sync.get(['bookmarks', 'settings'], (result) => {
-      try {
-        // Ensure bookmarks is an array and handle each item
-        const rawBookmarks = result.bookmarks || []
-        bookmarks.value = Array.isArray(rawBookmarks) ? rawBookmarks.map(bookmark => ({
-          id: bookmark.id || Date.now(),
-          url: bookmark.url || '',
-          title: bookmark.title || '',
-          category: bookmark.category || 'Default',
-          rating: Number(bookmark.rating) || 0,
-          tags: Array.isArray(bookmark.tags) ? bookmark.tags.map(tag => tag.toString()) : [],
-          createdAt: bookmark.createdAt || new Date().toISOString()
-        })) : []
-
-        // 从所有书签中提取唯一的分类
-        const uniqueCategories = new Set(['Default']) // 确保默认分类总是存在
-        bookmarks.value.forEach(bookmark => {
-          if (bookmark.category) {
-            uniqueCategories.add(bookmark.category)
-          }
-        })
-        categories.value = Array.from(uniqueCategories)
-
-      } catch (error) {
-        console.error('Error processing bookmarks:', error)
+    getBookmarks()
+      .then((rawBookmarks) => {
+        try {
+          normalizeBookmarkList(rawBookmarks)
+        } catch (error) {
+          console.error('Error processing bookmarks:', error)
+          bookmarks.value = []
+          categories.value = ['Default']
+        }
+      })
+      .catch((err) => {
+        console.error('Error loading bookmarks:', err)
         bookmarks.value = []
         categories.value = ['Default']
-      }
-    })
+      })
   } else {
     try {
       const storedBookmarks = localStorage.getItem('bookmarks')
@@ -648,30 +654,16 @@ const loadData = () => {
   }
 }
 
-// 监听存储变化
+// 监听存储：local 与 sync（分片）变化都重新合并加载，便于多设备同步
 if (chrome.storage) {
-  chrome.storage.onChanged.addListener((changes) => {
+  chrome.storage.onChanged.addListener((changes, areaName) => {
     try {
-      if (changes.bookmarks) {
-        const newBookmarks = changes.bookmarks.newValue
-        bookmarks.value = Array.isArray(newBookmarks) ? newBookmarks.map(bookmark => ({
-          id: bookmark.id || Date.now(),
-          url: bookmark.url || '',
-          title: bookmark.title || '',
-          category: bookmark.category || 'Default',
-          rating: Number(bookmark.rating) || 0,
-          tags: Array.isArray(bookmark.tags) ? bookmark.tags.map(tag => tag.toString()) : [],
-          createdAt: bookmark.createdAt || new Date().toISOString()
-        })) : []
-
-        // 从所有书签中提取唯一的分类
-        const uniqueCategories = new Set(['Default']) // 确保默认分类总是存在
-        bookmarks.value.forEach(bookmark => {
-          if (bookmark.category) {
-            uniqueCategories.add(bookmark.category)
-          }
-        })
-        categories.value = Array.from(uniqueCategories)
+      if (areaName === 'local' && changes.bookmarks) {
+        loadData()
+        return
+      }
+      if (areaName === 'sync' && bookmarkSyncAreaChanged(changes)) {
+        loadData()
       }
     } catch (error) {
       console.error('Error processing storage changes:', error)
@@ -740,11 +732,18 @@ const handleInvertSelection = () => {
   margin-bottom: 8px;
 }
 
+.tags-list-scroll {
+  max-height: 128px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  padding-right: 2px;
+}
+
 .tags-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 16px;
 }
 
 .action-bar {

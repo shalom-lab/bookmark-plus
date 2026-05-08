@@ -39,6 +39,19 @@
   - 支持14种语言
   - 可自定义设置
 
+- **Chrome 数据同步**
+  - 在同一 Google / Chrome 账号下开启扩展同步时，书签可在多设备间同步
+  - 完整数据保存在 `chrome.storage.local`（容量大）；`chrome.storage.sync` 使用**分片**写入，规避原先单个键 **约 8KB** 上限导致的保存失败
+
+### 📦 Chrome 同步与容量说明
+
+| 说明 | 现状 |
+|------|------|
+| **单键约 8KB 限制** | 已通过多分片键（`bm_chunks_v1_*`）规避，避免因单键过大而无法写入同步区。 |
+| **本机权威数据** | 完整书签列表优先写入 `chrome.storage.local`，即使同步较慢或触顶，本机使用仍稳定。 |
+| **多设备冲突** | 读取时按时间戳 `updatedAt` 取较新数据，优先级：分片 sync → 本地 → 旧版单键 sync（若仍存在）。 |
+| **同步总配额约 100KB** | 仍为 Chrome 对扩展 `storage.sync` 的**整区**上限；数据量极大时可能无法全部进同步，但**本地数据仍可用**；大体量备份请用 **GitHub 上传**（上传页）。 |
+
 <p align="center">
   <img src="./public/promo-large.png" alt="Bookmark Plus 功能展示" width="100%" style="max-width: 1400px">
 </p>

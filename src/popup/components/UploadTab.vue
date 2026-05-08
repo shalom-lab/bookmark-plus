@@ -55,6 +55,7 @@
 <script setup>
 import { ref, computed, onMounted, inject } from 'vue'
 import { useMessage } from 'naive-ui'
+import { getBookmarks } from '../../utils/bookmarksStorage.js'
 
 const props = defineProps({
   translations: {
@@ -304,20 +305,6 @@ const handleUpload = async () => {
   } finally {
     uploading.value = false
   }
-}
-
-// 从storage获取书签
-const getBookmarks = () => {
-  return new Promise((resolve) => {
-    if (chrome.storage) {
-      chrome.storage.sync.get(['bookmarks'], (result) => {
-        resolve(result.bookmarks || [])
-      })
-    } else {
-      const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]')
-      resolve(bookmarks)
-    }
-  })
 }
 
 // 保存到storage

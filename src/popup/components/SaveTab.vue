@@ -28,6 +28,8 @@
 <script setup>
 import { ref, computed, onMounted, inject } from 'vue'
 import { useMessage } from 'naive-ui'
+import { getBookmarks, setBookmarks } from '../../utils/bookmarksStorage.js'
+import { normalizeUserUrlInput } from '../../utils/urlSafety.js'
 
 const props = defineProps({
   settings: {
@@ -75,11 +77,17 @@ const rules = {
     {
       validator: (rule, value) => {
         if (!value) return true
+        const v = value.trim()
         try {
-          new URL(value)
+          new URL(v)
           return true
-        } catch (e) {
-          return false
+        } catch {
+          try {
+            new URL(`https://${v}`)
+            return true
+          } catch {
+            return false
+          }
         }
       },
       message: () => props.translations.invalidUrl,
@@ -229,7 +237,15 @@ const handleSave = (e) => {
 
   formRef.value.validate(async (errors) => {
     if (errors) {
-      console.log(errors)
+      const flat = Object.values(errors).flat().filter(Boolean)
+      const msg = flat[0]?.message || props.translations.validationError
+      message.warning(typeof msg === 'function' ? msg() : msg)
+      return
+    }
+
+    const normalizedUrl = normalizeUserUrlInput(saveForm.value.url || '')
+    if (!normalizedUrl) {
+      message.error(props.translations.invalidUrl)
       return
     }
 
@@ -241,7 +257,7 @@ const handleSave = (e) => {
     // 创建新书签对象，使用原始值
     const newBookmark = {
       id: Date.now(),
-      url: saveForm.value.url || '',
+      url: normalizedUrl,
       title: saveForm.value.title || '',
       category: saveForm.value.category || 'Default',
       rating: Number(saveForm.value.rating) || 0,
@@ -252,33 +268,17 @@ const handleSave = (e) => {
     // 存储处理
     if (chrome.storage) {
       try {
-        chrome.storage.sync.get(['bookmarks'], (result) => {
-          if (chrome.runtime.lastError) {
-            message.error(props.translations.saveFailed)
-            console.error('Storage error:', chrome.runtime.lastError)
-            return
-          }
+        const storedBookmarks = await getBookmarks()
+        const isDuplicate = storedBookmarks.some(b => b.url === newBookmark.url)
 
-          // 检查URL是否重复
-          const storedBookmarks = Array.isArray(result.bookmarks) ? result.bookmarks : []
-          const isDuplicate = storedBookmarks.some(b => b.url === newBookmark.url)
-          
-          if (isDuplicate) {
-            message.warning(props.translations.duplicateBookmark)
-            return
-          }
+        if (isDuplicate) {
+          message.warning(props.translations.duplicateBookmark)
+          return
+        }
 
-          const updatedBookmarks = [...storedBookmarks, newBookmark]
-
-          chrome.storage.sync.set({ bookmarks: updatedBookmarks }, () => {
-            if (chrome.runtime.lastError) {
-              message.error(props.translations.saveFailed)
-              return
-            }
-            resetForm()
-            message.success(props.translations.bookmarkSaved)
-          })
-        })
+        await setBookmarks([...storedBookmarks, newBookmark])
+        resetForm()
+        message.success(props.translations.bookmarkSaved)
       } catch (error) {
         console.error('Error saving bookmark:', error)
         message.error(props.translations.saveFailed)
