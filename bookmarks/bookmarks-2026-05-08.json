@@ -1,0 +1,392 @@
+[
+  {
+    "category": "我的",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233451063,
+    "rating": 5,
+    "tags": [],
+    "title": "RSS Reader",
+    "url": "https://shalom-lab.github.io/rss-reader/"
+  },
+  {
+    "category": "Web",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450728,
+    "rating": 5,
+    "tags": [
+      "AI",
+      "复刻网页"
+    ],
+    "title": "Same",
+    "url": "https://same.new/"
+  },
+  {
+    "category": "Web",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450406,
+    "rating": 3,
+    "tags": [],
+    "title": "Transformers.js",
+    "url": "https://huggingface.co/docs/transformers.js/en/index"
+  },
+  {
+    "category": "Web",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450428,
+    "rating": 5,
+    "tags": [],
+    "title": "Kokoro Web",
+    "url": "https://huggingface.co/spaces/Xenova/kokoro-web"
+  },
+  {
+    "category": "Web",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450345,
+    "rating": 5,
+    "tags": [
+      "AI",
+      "图像生成"
+    ],
+    "title": "EasyControl Ghibli",
+    "url": "https://huggingface.co/spaces/jamesliu1217/EasyControl_Ghibli"
+  },
+  {
+    "category": "Web",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450245,
+    "rating": 3,
+    "tags": [
+      "SEO"
+    ],
+    "title": "Open Graph Meta Tag Generator",
+    "url": "https://remit.ee/tools/open-graph-meta-tag-generator/"
+  },
+  {
+    "category": "AI",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450250,
+    "rating": 3,
+    "tags": [
+      "图像生成"
+    ],
+    "title": "Raphael AI - 免费无限制 AI 图像生成器",
+    "url": "https://raphael.app/zh"
+  },
+  {
+    "category": "Web",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450762,
+    "rating": 3,
+    "tags": [],
+    "title": "State Management | Tauri",
+    "url": "https://v2.tauri.app/develop/state-management/"
+  },
+  {
+    "category": "R语言",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450746,
+    "rating": 3,
+    "tags": [],
+    "title": "4.6 Building a New Theme | Mastering Software Development in R",
+    "url": "https://bookdown.org/rdpeng/RProgDA/building-a-new-theme.html"
+  },
+  {
+    "category": "R语言",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450264,
+    "rating": 5,
+    "tags": [
+      "R语言发展史"
+    ],
+    "title": "A Timeline of R's first 30 years",
+    "url": "https://www.jumpingrivers.com/misc/timeline/"
+  },
+  {
+    "category": "R语言",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450417,
+    "rating": 5,
+    "tags": [
+      "dplyr",
+      "不相等拼接"
+    ],
+    "title": "Beyond Equality: Unleashing the Power of Non-Equi Joins in {dplyr}",
+    "url": "https://www.appsilon.com/post/non-equi-joins-in-dplyr"
+  },
+  {
+    "category": "Web",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233451026,
+    "rating": 5,
+    "tags": [
+      "拼字幕"
+    ],
+    "title": "拼字幕 - 快速生成社交媒体字幕拼图",
+    "url": "https://quotemaker.cc/"
+  },
+  {
+    "category": "求职",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450782,
+    "rating": 3,
+    "tags": [],
+    "title": "河南省卫生信息学会第二届理事会拟任候选负责人名单-河南省卫生健康委员会",
+    "url": "https://wsjkw.henan.gov.cn/2025/06-24/3173156.html"
+  },
+  {
+    "category": "Web",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450335,
+    "rating": 5,
+    "tags": [
+      "Office",
+      "Web Office"
+    ],
+    "title": "ranuts.github.io/document/",
+    "url": "https://ranuts.github.io/document/"
+  },
+  {
+    "category": "Web",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450621,
+    "rating": 5,
+    "tags": [
+      "dpi转换"
+    ],
+    "title": "Online DPI Converter",
+    "url": "https://www.dpi-converter.com/"
+  },
+  {
+    "category": "R语言",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450958,
+    "rating": 3,
+    "tags": [
+      "地图",
+      "套索"
+    ],
+    "title": "Lasso selection and spatial filtering for your Shiny mapping apps – WALKER DATA",
+    "url": "https://walker-data.com/posts/lasso-selection/"
+  },
+  {
+    "category": "Python",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450605,
+    "rating": 3,
+    "tags": [],
+    "title": "Python for Data Analysis, 3E",
+    "url": "https://wesmckinney.com/book/pandas-basics"
+  },
+  {
+    "category": "学术",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450893,
+    "rating": 5,
+    "tags": [
+      "FLUVIEW"
+    ],
+    "title": "Public Health Laboratory Virologic Age Surveillance",
+    "url": "https://gis.cdc.gov/grasp/fluview/flu_by_age_virus.html"
+  },
+  {
+    "category": "学术",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450965,
+    "rating": 3,
+    "tags": [
+      "beta回归"
+    ],
+    "title": "Beta Regression in R | Journal of Statistical Software",
+    "url": "https://www.jstatsoft.org/article/view/v034i02"
+  },
+  {
+    "category": "实用工具",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450712,
+    "rating": 3,
+    "tags": [
+      "制图"
+    ],
+    "title": "Self-host Free Whiteboard - Excalidraw",
+    "url": "https://excalidraw-1svfq6sn.edgeone.site/"
+  },
+  {
+    "category": "学术",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450520,
+    "rating": 5,
+    "tags": [
+      "空间科学"
+    ],
+    "title": "Welcome | Spatial Statistics for Data Science: Theory and Practice with R",
+    "url": "https://www.paulamoraga.com/book-spatial/"
+  },
+  {
+    "category": "资源网站",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450880,
+    "rating": 5,
+    "tags": [],
+    "title": "书格",
+    "url": "https://www.shuge.org/"
+  },
+  {
+    "category": "R语言",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450419,
+    "rating": 3,
+    "tags": [
+      "tidypredict"
+    ],
+    "title": "Run Predictions Inside the Database • tidypredict",
+    "url": "https://tidypredict.tidymodels.org/#supported-models"
+  },
+  {
+    "category": "实用工具",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450683,
+    "rating": 5,
+    "tags": [
+      "加载动画",
+      "前端"
+    ],
+    "title": "SVG + GIF + PNG Animations for Spinner,Icon,Text and More · Loading.io",
+    "url": "https://loading.io/spinner/"
+  },
+  {
+    "category": "学术",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233451026,
+    "rating": 5,
+    "tags": [
+      "Lancet"
+    ],
+    "title": "The Lancet, 20 December 2025, Volume 406, Issue 10522, Pages 2865-2990",
+    "url": "https://www.thelancet.com/journals/lancet/issue/current"
+  },
+  {
+    "category": "实用工具",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450359,
+    "rating": 3,
+    "tags": [
+      "工具",
+      "录屏"
+    ],
+    "title": "浏览器录制视频gif",
+    "url": "https://github.com/sunwu51/browser-recorder"
+  },
+  {
+    "category": "实用工具",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450843,
+    "rating": 5,
+    "tags": [
+      "Spark"
+    ],
+    "title": "Spark标签",
+    "url": "https://shalom-lab.github.io/Spark/#setup=Z2l0aHViX3BhdF8xMUFMWDVCNlkwWUlGUXFVOG8zOGV0X2wxSlNBaU12aTNsWFFXWkFBYUlham1TOUVocTBZY3BhRlpXcXpqdFZxUEs3STdYQko3QlcwN0drRThufHNoYWxvbS1sYWIvU3Bhcms%3D"
+  },
+  {
+    "category": "我的",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450425,
+    "rating": 3,
+    "tags": [
+      "工具箱"
+    ],
+    "title": "Vibe Lab - Web 实验集合",
+    "url": "https://shalom-lab.github.io/vibe-lab/index.html"
+  },
+  {
+    "category": "实用工具",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233451075,
+    "rating": 5,
+    "tags": [
+      "zlib"
+    ],
+    "title": "Z-Library – the world’s largest e-book library. Your gateway to knowledge and culture.",
+    "url": "https://singlelogin.rs/"
+  },
+  {
+    "category": "Huggingface",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450271,
+    "rating": 5,
+    "tags": [
+      "语音转文字"
+    ],
+    "title": "Qwen3 ASR Demo - a Hugging Face Space by Qwen",
+    "url": "https://huggingface.co/spaces/Qwen/Qwen3-ASR-Demo"
+  },
+  {
+    "category": "大模型",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450563,
+    "rating": 3,
+    "tags": [],
+    "title": "Qwen3.6 Plus Preview (free) - API Pricing & Providers | OpenRouter",
+    "url": "https://openrouter.ai/qwen/qwen3.6-plus-preview:free"
+  },
+  {
+    "category": "AI",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450854,
+    "rating": 3,
+    "tags": [],
+    "title": "Learn Claude Code",
+    "url": "https://learn.shareai.run/zh/compare/"
+  },
+  {
+    "category": "Math",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450790,
+    "rating": 3,
+    "tags": [
+      "群表示论"
+    ],
+    "title": "RepresentationTheoryNotes",
+    "url": "https://anthonymendes.github.io/RepNotes.pdf"
+  },
+  {
+    "category": "Math",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450561,
+    "rating": 3,
+    "tags": [],
+    "title": "Tan.pdf",
+    "url": "https://math.uchicago.edu/~may/REU2014/REUPapers/Tan.pdf"
+  },
+  {
+    "category": "资源网站",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450984,
+    "rating": 3,
+    "tags": [],
+    "title": "最新地址发布页 - 泡椒音乐",
+    "url": "https://pjmp3.de/"
+  },
+  {
+    "category": "Web",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450239,
+    "rating": 3,
+    "tags": [
+      "图片网站"
+    ],
+    "title": "wanxb/Luminote: a lightweight photography portfolio",
+    "url": "https://github.com/wanxb/Luminote"
+  },
+  {
+    "category": "实用工具",
+    "createdAt": "2026-05-08T09:44:10.082Z",
+    "id": 1778233450300,
+    "rating": 3,
+    "tags": [
+      "视频下载"
+    ],
+    "title": "GreenVideo视频下载",
+    "url": "https://greenvideo.cc/bilibili"
+  }
+]
