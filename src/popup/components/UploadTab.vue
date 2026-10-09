@@ -53,7 +53,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, inject } from 'vue'
+import { ref, computed, onMounted, onUnmounted, inject } from 'vue'
 import { useMessage } from 'naive-ui'
 import { getBookmarks } from '../../utils/bookmarksStorage.js'
 
@@ -331,28 +331,58 @@ const saveToStorage = (data) => {
   })
 }
 
-// 初始化数据
-onMounted(async () => {
+// 初始化；GitHub 配置与「设置」页一样走 chrome.storage.sync，随账号跨设备同步
+let removeSyncListener = null
+
+onMounted(() => {
   if (chrome.storage) {
     chrome.storage.sync.get(['githubSettings', 'lastUploadTime'], (result) => {
+      if (chrome.runtime.lastError) {
+        console.error('UploadTab sync get:', chrome.runtime.lastError)
+        return
+      }
       if (result.githubSettings) {
         formValue.value = { ...formValue.value, ...result.githubSettings }
-        isTokenSet.value = !!formValue.value.token // 根据是否有token设置状态
+        isTokenSet.value = !!formValue.value.token
       }
       if (result.lastUploadTime) {
         lastUploadTime.value = result.lastUploadTime
       }
     })
+
+    const onSyncChange = (changes, area) => {
+      if (area !== 'sync') return
+      if (changes.githubSettings) {
+        const nv = changes.githubSettings.newValue
+        if (nv && typeof nv === 'object') {
+          formValue.value = { ...formValue.value, ...nv }
+          isTokenSet.value = !!formValue.value.token
+        } else {
+          formValue.value = { ...formValue.value, token: '', fullRepo: null, path: 'bookmarks' }
+          isTokenSet.value = false
+          repoOptions.value = []
+        }
+      }
+      if (changes.lastUploadTime) {
+        lastUploadTime.value = changes.lastUploadTime.newValue ?? null
+      }
+    }
+    chrome.storage.onChanged.addListener(onSyncChange)
+    removeSyncListener = () => chrome.storage.onChanged.removeListener(onSyncChange)
   } else {
     try {
       const settings = JSON.parse(localStorage.getItem('githubSettings') || '{}')
       formValue.value = { ...formValue.value, ...settings }
-      isTokenSet.value = !!formValue.value.token // 根据是否有token设置状态
+      isTokenSet.value = !!formValue.value.token
       lastUploadTime.value = localStorage.getItem('lastUploadTime')
     } catch (error) {
       console.error('Error loading settings:', error)
     }
   }
+})
+
+onUnmounted(() => {
+  removeSyncListener?.()
 })
 </script>
 
